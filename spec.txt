@@ -1,0 +1,47 @@
+This assignment will be about numbers: your goal will be to
+implement a class, ‹number›, which represents a real number with an
+arbitrary number of digits (also known as an ‘arbitrary precision’
+number). The class should have operators for addition, subtraction,
+multiplication, division and comparisons, as well as unary minus.
+
+Additionally, add ‹power( int )› and ‹sqrt( int )› as ‹const›
+methods. The argument to ‹power› is the exponent. The argument of
+‹sqrt› gives the number of «decimal» digits that should be exact in
+the result (see also below).
+
+The constructor of ‹number› takes a single integer argument and
+constructs an instance of ‹number› with the argument as its value
+(this constructor should allow implicit conversions from ‹int›). A
+default-constructed ‹number› should be 0.
+
+As an example, all of the following should be valid code:
+
+    number a( 10 ), b( 25 );
+    number c = a + b;
+    number d = c / a;
+    number e = d * a;
+    assert( e == a + b );
+    assert( e != a );
+    assert( c > a );
+    assert( a < b );
+    assert( c.power( 2 ) > c );
+    c = number( 10 ).power( -5 );
+    assert( c > c.power( 2 ) );
+
+The decimal digits supplied to ‹sqrt› should be interpreted as
+follows:
+
+    number s = number( 145 ).sqrt( 3 ); /* 3 fractional digits */
+    /* the exact result rounded to 3 fractional places is 12.042 */
+    number lower = number( 120415 ) * number( 10 ).power( -4 );
+    number upper = number( 120425 ) * number( 10 ).power( -4 );
+    assert( s > lower );
+    assert( s < upper );
+
+Or in other words, if your result is (single) rounded to the given
+number of decimal places, it must agree in all those decimal places
+with a correctly rounded exact result.
+
+Division by zero and square roots of negative numbers are undefined.
+
+PS: A reference solution is about 250 lines of not very dense code.
